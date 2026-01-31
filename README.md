@@ -1,1 +1,19 @@
-A production-ready REST API for task management built with Spring Boot, Spring Security (JWT), PostgreSQL, and Docker. Includes CI/CD pipeline with GitHub Actions and AWS EC2 deployment. Stack: Java 17 | Spring Boot | Spring Security | PostgreSQL | Docker | GitHub Actions | AWS
+# TaskFlow API
+
+## Description
+API REST sécurisée de gestion de tâches (User → Tasks)
+
+## Tech Stack
+- Java 17
+- Spring Boot 4.x
+- Spring Security
+- JPA / Hibernate
+- PostgreSQL (H2 en DEV)
+
+## Architecture
+Controller → Service → Repository
+
+## Roadmap
+- Auth (JWT)
+- CRUD Tasks
+- Roles (ADMIN / USER)
