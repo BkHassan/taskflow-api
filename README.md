@@ -1,0 +1,1 @@
+A production-ready REST API for task management built with Spring Boot, Spring Security (JWT), PostgreSQL, and Docker. Includes CI/CD pipeline with GitHub Actions and AWS EC2 deployment. Stack: Java 17 | Spring Boot | Spring Security | PostgreSQL | Docker | GitHub Actions | AWS
