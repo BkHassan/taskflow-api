@@ -1,9 +1,12 @@
 package com.taskflow.api;
 
+import com.taskflow.api.security.JwtProperties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
-@SpringBootApplication()
+@SpringBootApplication
+@EnableConfigurationProperties(JwtProperties.class)
 public class Application {
 
 	public static void main(String[] args) {

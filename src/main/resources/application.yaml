@@ -1,18 +1,89 @@
 spring:
   application:
-    name: taskflow.api
+    name: taskflow-api
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:dev}
+  jpa:
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+
+server:
+  port: ${SERVER_PORT:8080}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: never
+
+app:
+  jwt:
+    secret: ${JWT_SECRET:TaskFlowDevSecretKeyThatIsAtLeast32BytesLong!!}
+    expiration-ms: ${JWT_EXPIRATION_MS:86400000}
+  seed-demo-users: ${SEED_DEMO_USERS:true}
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: method
+  api-docs:
+    path: /v3/api-docs
+
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
   datasource:
-    url: jdbc:h2:mem:taskflowdb
+    url: jdbc:h2:mem:taskflowdb;MODE=PostgreSQL
     driver-class-name: org.h2.Driver
     username: sa
-    password: 
+    password:
   h2:
     console:
       enabled: true
+      path: /h2-console
   jpa:
     hibernate:
       ddl-auto: create-drop
     show-sql: true
-    properties:
-      hibernate:
-        format_sql: true
+
+---
+spring:
+  config:
+    activate:
+      on-profile: test
+  datasource:
+    url: jdbc:h2:mem:taskflowtestdb;MODE=PostgreSQL;DB_CLOSE_DELAY=-1
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: false
+app:
+  seed-demo-users: false
+  jwt:
+    secret: TaskFlowTestSecretKeyThatIsAtLeast32BytesLong!!
+    expiration-ms: 3600000
+
+---
+spring:
+  config:
+    activate:
+      on-profile: docker
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://db:5432/taskflow}
+    username: ${SPRING_DATASOURCE_USERNAME:taskflow}
+    password: ${SPRING_DATASOURCE_PASSWORD:taskflow}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false

@@ -1,0 +1,11 @@
+.git
+.github
+.idea
+.vscode
+target
+*.iml
+.env
+README.md
+MANUAL_TASKS.md
+.m2
+m2-cache
